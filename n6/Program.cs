@@ -51,7 +51,6 @@ namespace n6
             Console.WriteLine($"Самая тёплая неделя: {warmestWeek} (ср. темп = {warmestAvg:F1})");
             Console.WriteLine($"Самая холодная неделя: {coldestWeek} (ср. темп = {coldestAvg:F1})");
 
-            // === Находим среднюю температуру за месяц ===
             int total = 0;
             for (int i = 0; i < temps.Length; i++)
                 total += temps[i];
@@ -61,7 +60,6 @@ namespace n6
             Console.WriteLine($"\nСредняя температура за месяц: {monthAvg:F1}");
             Console.WriteLine("Дни выше средней:");
 
-            // Дни выше средней
             for (int i = 0; i < temps.Length; i++)
             {
                 if (temps[i] > monthAvg)
@@ -70,27 +68,21 @@ namespace n6
                 }
             }
 
-            // ------- МОРОЗ -------
             var frost = temps.Where(t => t < 0);
             Console.WriteLine("Мороз (t < 0):");
             foreach (int i in frost) Console.WriteLine(" " + i);
             Console.WriteLine();
-
-            // ------- ХОЛОДНО -------
 
             var cold = temps.Where(t => t >= 0 && t <= 10);
             Console.WriteLine("Холодно (0…10):");
             foreach (int i in cold) Console.WriteLine(" " + i);
             Console.WriteLine();
 
-            // ------- ТЕПЛО -------
-
             var warm = temps.Where(t => t >= 11 && t <= 20);
             Console.WriteLine("Тепло (11…20):");
             foreach (int i in warm) Console.WriteLine(" " + i);
             Console.WriteLine();
 
-            // ------- ЖАРКО -------
             var hot = temps.Where(t => t > 20);
             Console.WriteLine("Жарко (t > 20):");
             foreach (int i in hot) Console.WriteLine(" " + i);
