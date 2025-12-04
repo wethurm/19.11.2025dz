@@ -19,42 +19,24 @@ namespace n8
                 mas[i] = r.Next(0, 101);
                 Console.Write(mas[i] + " ");
             }
-            Console.WriteLine($"Отсортированный");
             Array.Sort(mas);
-            for (int i = 0; i < mas.Length; i++)
+            int med = (int)Math.Round(mas.Average());
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(med);
+            Console.WriteLine();
+
+            int std = (int)Math.Round(Math.Sqrt(mas.Sum(x => Math.Pow(x - med, 2)) / (mas.Length - 1)));
+            Console.WriteLine(std);
+
+            int[] top10 = new int[mas.Length / 10];
+            int sc = mas.Length - 1;
+            for (int i = 0; i < top10.Length; i++)
             {
-                Console.Write(mas[i] + " ");
+                Console.Write(mas[sc] + " ");
+                sc--;
             }
-            double med = 0;
-            if (mas.Length % 2 == 0)
-            {
-                med = (mas[(mas.Length / 2) - 1] + mas[mas.Length / 2]) / 2.0;
-            }
-            else
-                med = mas[mas.Length / 2];
-            Console.WriteLine($"Медиана: {med}");
-            double sum = 0.0;
-            for (int i = 0; i < mas.Length; i++)
-            {
-                sum += mas[i];
-            }
-            double sred = sum / mas.Length;
-            double summ = 0.0;
-            foreach (int i in mas)
-            {
-                double vch = i - sred;
-                double kv = Math.Pow(vch, 2);
-                summ += kv;
-            }
-            double sred2 = summ / mas.Length;
-            double kor = Math.Sqrt(sred2);
-            Console.WriteLine($"Среднее отк:{kor:F2}");
-            Console.WriteLine($"Топ-10%");
-            var top10 = mas.OrderByDescending(m => m).Take(Convert.ToInt32(Math.Ceiling(mas.Length * 0.1)));
-            foreach (int i in top10)
-            {
-                Console.WriteLine($" -- {i} --");
-            }
+
             Console.WriteLine();
             Console.WriteLine($"Сортировка результатов по группам");
             var nezch = mas.Where(m => m < 25);
