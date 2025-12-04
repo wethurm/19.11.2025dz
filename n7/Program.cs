@@ -12,78 +12,61 @@ namespace n7
         {
             string[] mas = {
         "Груша,145,Продукты",
-        "МышьГнилая,120,Техника",
+        "МышьГнилая,120,1",
         "МышьСвежая,45000,Лекарства",
-        "Свага,2300,Техника",
+        "Свага,2300,1",
         "ШаурмаСырная,380,Лекарства",
-        "ТруСфэг,25,Продукты",
+        "ТруСфэг,25,1",
         "Огурец,30,Продукты",
         "Карандаш,25,Канцелярия",
-        "Маркер,90,Канцелярия",
+        "Маркер,90,1",
         "Манго,120,Продукты"
         };
-            for (int t = 0; t < mas.Length; t++)
+            Console.WriteLine("Выберите категорию:");
+            string category = Console.ReadLine();
+            string[] mas2 = new string[mas.Length];
+            int i = 0;
+            for(int s = 0; s < mas.Length; s++)
             {
-                string[] tov = mas[t].Split(',');
-                Console.WriteLine($"{tov[0]} - {tov[1]} руб. ({tov[2]})");
-            }
-            Console.WriteLine($"Введите категорию товаров, которые хотите найти:");
-            string kat = Console.ReadLine();
-            for (int t = 0; t < mas.Length; t++)
-            {
-                string[] tov = mas[t].Split(',');
-                string name = tov[0];
-                string price = tov[1];
-                string katt = tov[2];
-                if (katt.ToLower() == kat.ToLower())
+                if (mas[s].Split(',')[2] == category)
                 {
-                    Console.WriteLine($"{name} - {price} руб. ({katt})");
+                    mas2[i] = mas[s];
+                    i++;
                 }
             }
-            Console.WriteLine($"Введите ценовой диапозон для поиска товаров.");
-            Console.WriteLine($"Введите минимум:");
-            int min = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"Введите максимум:");
-            int max = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine();
-            Console.WriteLine($"Товары в диапазоне от {min} до {max} руб.:");
-            for (int t = 0; t < mas.Length; t++)
+
+            for (int s = 0; s<i; s++)
             {
-                string[] tov = mas[t].Split(',');
-                string name = tov[0];
-                int price = int.Parse(tov[1]);
-                string katt = tov[2];
-                if (price >= min && price <= max)
+                Console.WriteLine(mas2[s].Split(',')[0]);
+            }
+
+            Console.WriteLine("Введите нижнюю границу диапазона:");
+            int low = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите верхнюю границу диапазона:");
+            int top = Convert.ToInt32(Console.ReadLine());
+
+            string[] sorted = new string[mas2.Length];
+            int j = 0;
+
+            for(int s = 0; s<i; s++)
+            {
+
+                string[] product = mas2[s].Split(',');
+                int price = int.Parse(product[1]);
+
+                if (price >= low && price <= top)
                 {
-                    Console.WriteLine($"{name} - {price} руб. ({katt})");
+                    sorted[j] = mas2[s].Split(',')[0]; j++;
                 }
             }
-            Console.WriteLine($"Отсортированный список по цене:");
-            for (int i = 0; i < mas.Length - 1; i++)
+
+            Console.WriteLine();
+            Console.WriteLine("Отсортированный список:");
+            for(int s = 0; s < j; s++)
             {
-                for (int j = i + 1; j < mas.Length; j++)
-                {
-                    string[] tov1 = mas[i].Split(',');
-                    string[] tov2 = mas[j].Split(',');
-
-                    int price1 = int.Parse(tov1[1]);
-                    int price2 = int.Parse(tov2[1]);
-
-                    if (price1 > price2)
-                    {
-                        string temp = mas[i];
-                        mas[i] = mas[j];
-                        mas[j] = temp;
-                    }
-                }
+                Console.WriteLine(sorted[s]);
             }
-            for (int t = 0; t < mas.Length; t++)
-            {
-                string[] tov = mas[t].Split(',');
-                Console.WriteLine($"{tov[0]} - {tov[1]} руб. ({tov[2]})");
-            }
-
-
         }
     }
 }
