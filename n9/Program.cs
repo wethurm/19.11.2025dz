@@ -66,7 +66,7 @@ namespace n9
                 best[i] = summ / mas.Length;
                 Console.WriteLine($"{sub[i]}: {best[i]}");
             }
-            Console.WriteLine($"Предмет с наивысшей успеваимостью:");
+            Console.WriteLine($"Предмет с наивысшей успеваимостью(not fazullin):");
             double max = 0;
             string bsub = "";
             for (int i = 0; i < best.Length; i++)
